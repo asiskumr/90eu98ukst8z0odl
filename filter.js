@@ -5,18 +5,11 @@
 // bhpodosmin15-10.149.14.15`
 
 
-
-var total_Count = 0;
-
-//let output = print_all_Interfaces(description)
-
-
-
 function print_all_Interfaces() {
 
     // var input = e.target.value
     var input = document.getElementById('description').value.trim();
-
+    var total_Count = 0;
     deviceBox = [];
     let word = input.replace(/\n/g, " ").split(' ')
     //get devices details
