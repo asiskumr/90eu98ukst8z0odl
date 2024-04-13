@@ -7,7 +7,7 @@
 
 function print_all_Interfaces() {
 
-    // var input = e.target.value
+    document.getElementById('result').value = "";
     var input = document.getElementById('description').value.trim();
     var total_Count = 0;
     deviceBox = [];
@@ -101,7 +101,7 @@ function print_all_Interfaces() {
     });
     
     document.getElementById('result').value =  `UPDATE:\n` + str1 + str2 + str4 + str10;
-    document.getElementById('result').value = "";
+    
     return deviceBox;
 }
 
