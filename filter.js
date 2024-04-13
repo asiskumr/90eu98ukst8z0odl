@@ -108,6 +108,7 @@ function print_all_Interfaces() {
     });
     
     document.getElementById('result').value =  `UPDATE:\n` + str1 + str2 + str4 + str10;
+    document.getElementById('result').value = "";
     return deviceBox;
 }
 
