@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Get interfaces details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="filter.js"></script>
+
+
+</head>
+
+<body>
+    <div id="banner">Text copied successfully!</div>
+
+    <div id="node" class="page ">
+        <!-- Content of page 1 -->
+
+
+        <a href="interface.html" class="btn btn-info" onclick="showPage('interface');">Go to Multiple/Interface
+            Down page</a>
+    </div>
+
+    <div id="interface" class="page active">
+        <!-- Content of page 2 -->
+
+
+        <a href="node.html" class="btn btn-info" onclick="showPage('node');">Go to Multiple Device Down page</a>
+    </div>
+
+    <form>
+
+
+        <label for="description">Enter Alert Description of multiple Interfaces down:</label>
+        <div class="tooltip">&#x1F6C8;
+            <span class="tooltiptext">
+                Logic is wriiten by assuming user won't do any modification while doing copy and paste
+                from "Description Details"
+            </span>
+        </div>
+        <textarea id="description" name="description" rows="5" cols="50"></textarea>
+
+        <div class="textarea-container">
+            <div class="div-60">
+
+                <label for="result">
+                    <p>List of Down Interfaces of corresponding devices</p>
+                </label>
+                <textarea id="result" name="result" rows="10" cols="50" readonly></textarea>
+            </div>
+            <div class="div-30">
+                <label for="result">
+                    <p>Click to copy PuTTY command for Down Interfaces: </p>
+                </label>
+                <!-- <textarea id="result1" name="result" rows="15" cols="30" readonly></textarea> -->
+                <div class="AllNodeButtons">
+                    <!-- <button type="button">Button 1</button>
+                    <button type="button">Buttkjengkegnon 2</button>
+                    <button type="button">Bon 3</button>
+                    <button type="button">Button 1</button> -->
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="button-container">
+            <input type="button" value="Generate details" onclick="print_all_Interfaces()">
+            <div id="copy-icon" onclick="copyToClipboard()"><i class="fas fa-copy"></i></div>
+
+        </div>
+    </form>
+
+</body>
+
+</html>
