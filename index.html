@@ -2,158 +2,82 @@
 <html>
 
 <head>
+
     <title>Get interfaces details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        form {
-            width: 90%;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        textarea {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #e2df13;
-            background-color: #b3d5e6;
-            color: #080303;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        input[type="button"] {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            background-color: #007BFF;
-            color: #fff;
-            cursor: pointer;
-            transition: transform 0.2s;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        input[type="button"]:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
-        }
-
-        #banner {
-            display: none;
-            text-align: center;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-
-        #copy-icon {
-            font-size: 30px;
-            cursor: pointer;
-            color: #007BFF;
-            display: inline-block;
-            margin-left: 10px;
-            transition: transform 0.2s, color 0.2s;
-        }
-
-        #copy-icon:hover {
-            color: #0056b3;
-            transform: scale(1.1);
-        }
-
-        /* Information Icon */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            border-bottom: 1px dotted black;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 300px;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-
-            /* Position the tooltip */
-            position: absolute;
-            z-index: 1;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-        }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
     <script src="filter.js"></script>
+  
 
 </head>
 
 <body>
-    <div id="banner">Text copied successfully!</div>
+    <div id="banner">Copied successfully!</div>
+
+    <div id="node" class="page active">
+        <!-- Content of page 1 -->
+      
+    
+        <a href="interface.html"class="btn btn-info" onclick="showPage('interface');">Go to Multiple/Interface
+            Down page</a>
+    </div>
+
+    <div id="interface" class="page">
+        <!-- Content of page 2 -->
+   
+        
+        <a href="node.html"class="btn btn-info" onclick="showPage('node');">Go to Multiple Device down page</a>
+    </div>
+
     <form>
 
-        
-        <label for="description">Enter Alert Description of multiple Interfaces down:</label><br>
+       
+        <label for="description">Enter description of multiple nodes down</label>
         <div class="tooltip">&#x1F6C8;
             <span class="tooltiptext">
-                Please keep Device details in last.
-                Example:
-                Device details:
-                au-olp-adm-it-dsw01-10.149.151.1
-                bhpodosmin15-10.149.14.15
-                abcd-10.149.14.14
-                </span>
+                Node Down lists
+            </span>
         </div>
-        <textarea id="description" name="description" rows="5" cols="50"></textarea><br>
-        <label for="result">List of Interfaces of mentioned devices</label><br>
-        <textarea id="result" name="result" rows="20" cols="50" readonly></textarea><br>
+        <textarea id="description" name="description" rows="5" cols="50"></textarea>
+
+        <div class="textarea-container">
+            <div class="div-60">
+
+                <label for="result">
+                    <p>Ping lists of device's IP</p>
+                </label>
+                <textarea id="result" name="result" rows="10" cols="50" readonly></textarea>
+            </div>
+            <div class="div-30">
+                <label for="result">
+                    <p>Click cursor to copy putty command below </p>
+                </label>
+                <!-- <textarea id="result1" name="result" rows="15" cols="30" readonly></textarea> -->
+                <div class="AllNodeButtons">
+                    <button type="button" id="copy_cmd" onclick="copyNodeUpCmd()">
+                        <p> sh ver | i uptime</p>
+
+                        <p> sh cdp nei </p>
+
+                        <p>sh env all</p>
+
+                        <p> sh process cpu his </p>
+
+                        <p> sh clo</p>
+                        <span class="hovertext">Click to copy!</span>
+                    </button>
+
+
+                </div>
+            </div>
+
+        </div>
+        <br>
         <div class="button-container">
-            <input type="button" value="Generate details" onclick="print_all_Interfaces()">
+            <input type="button" value="Generate details" onclick="print_all_IPs()">
             <div id="copy-icon" onclick="copyToClipboard()"><i class="fas fa-copy"></i></div>
+
         </div>
     </form>
 
