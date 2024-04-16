@@ -18,15 +18,25 @@ function print_all_Interfaces() {
     let word = currentInput.replace(/\n/g, " ").split(' ')
     //get devices details
     DEVICES_LIST = word.forEach(function (device, currentIndex) {
-        //  console.log(device + ": " + currentIndex);
+        // console.log(device + ": " + currentIndex);
         if (device == 'details:') {
             // console.log('Device Details:');
             for (let i = currentIndex + 1; i < word.length; i++) {
-                let node_full_name = word[i];
-                let ip = node_full_name.substr(node_full_name.lastIndexOf("-") + 1)
-                let node_name = node_full_name.slice(0, node_full_name.lastIndexOf("-"));
-                //  console.log(node_name);
-                deviceBox.push({ "Node_Name": node_name, "IP": ip, "Interfaces_Name": [] })
+                let node_full_name = word[i].trim();
+                if (isIP_Found(node_full_name) !== false) {
+                    let ip = isIP_Found(node_full_name);
+                    let startIndexOfIP = node_full_name.indexOf(ip);
+                    let node_name = node_full_name.slice(0, startIndexOfIP - 1);
+                    // console.log("node_name: " + node_name + " and IP: " + ip);
+                    deviceBox.push({ "Node_Name": node_name, "IP": ip, "Interfaces_Name": [] })
+                }
+                else {
+                    continue;
+                }
+
+                // let ip = node_full_name.substr(node_full_name.lastIndexOf("-") + 1)
+                // let node_name = node_full_name.slice(0, node_full_name.lastIndexOf("-"));
+
 
             }
 
@@ -246,25 +256,44 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
     }
 }
 
-function print_all_IPs(){
-    document.getElementById('result').value = "";
-    // var input = e.target.value
-    var currentInput = document.getElementById('description').value.trim();
-    // var currentInput =  "Device details:\nau-olp-adm-it-dsw01-10.149.151.1\nbhpodosmin15-10.149.14.15khk\nabcd-10.149.14.14";
-    // console.log(currentInput)
-    let ipPattern = /\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b/gm;
-    
+function isIP_Found(currentInput) {
+  
+    // let ipPattern = /\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b/gm;
+    let ipPattern = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/;
+
     // match(sentence) return all matched regex in a array, null otherwise
     let matches = currentInput.match(ipPattern);
-    console.log(matches)
-    var all_IP = "";
-    matches.forEach((ip_Address) =>{
-        let ip = 'ping '+ ip_Address + '\n';
-        all_IP += ip;
-        
+    // console.log(currentInput)
+    // console.log(matches == null)
+    if (matches === null) {
+        return false;
+    }
+    else {
+        // returning IP
+        return matches[0];
+    }
+    
+}
+
+function print_all_IPs(){
+     document.getElementById('result').value = "";
+    // var input = e.target.value
+    var currentInput = document.getElementById('description').value.trim();
+    IP_Box = "";
+
+    let word = currentInput.replace(/\n/g, " ").split(' ')
+    //get devices details
+    word.forEach(function (device) {
+        // console.log(device +" -> "+isIP_Found(device))
+        if (isIP_Found(device) !== false) {
+            let cmd = 'ping ' + isIP_Found(device) + '\n';
+            IP_Box += cmd;
+
+        }
     })
 
-    document.getElementById('result').value =  all_IP;
+
+    document.getElementById('result').value = IP_Box;
 }
 
 function showPage(pageId) {
