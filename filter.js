@@ -5,13 +5,17 @@
 // bhpodosmin15-10.149.14.15`
 
 
-function print_all_Interfaces() {
+var isClickingFirstTime = true;
 
+function print_all_Interfaces() {
     document.getElementById('result').value = "";
-    var input = document.getElementById('description').value.trim();
+    // var input = e.target.value
+    var currentInput = document.getElementById('description').value.trim();
+
     var total_Count = 0;
     deviceBox = [];
-    let word = input.replace(/\n/g, " ").split(' ')
+
+    let word = currentInput.replace(/\n/g, " ").split(' ')
     //get devices details
     DEVICES_LIST = word.forEach(function (device, currentIndex) {
         //  console.log(device + ": " + currentIndex);
@@ -56,7 +60,7 @@ function print_all_Interfaces() {
     // console.log("Update: ")
     //  console.log(" - Total " + total_Count + " interfaces are down from " + deviceBox.length + " devices. \n");
     str1 = "- Total " + total_Count + " interfaces are down from " + deviceBox.length + " devices. \n"
-    
+
 
     str2 = "";
     deviceBox.forEach((nodeObj, index) => {
@@ -71,16 +75,16 @@ function print_all_Interfaces() {
 
     })
     let str4 = "____________________________________________________________________________________\n\n"
-    
-   // console.log("____________________________________________________________________________________\n")
+
+    // console.log("____________________________________________________________________________________\n")
 
     str5 = "";
     str10 = ""
     deviceBox.forEach((nodeObj, index) => {
-        
+
         // console.log((index + 1) + " -> Node name: " + nodeObj.Node_Name);
         // console.log("     IP Address: " + nodeObj.IP);
-       
+
         // console.log("--------------Below " + nodeObj.Interfaces_Name.length + " interfaces are down------------------\n");
         let str6 = (index + 1) + " -> Node name: " + nodeObj.Node_Name;
         let str7 = "\n     IP Address: " + nodeObj.IP;
@@ -90,18 +94,22 @@ function print_all_Interfaces() {
         str9 = ""
         nodeObj.Interfaces_Name.forEach(interface => (
             // console.log(interface + "\n")
-             str9 +=  interface + "\n"
+            str9 += interface + "\n"
         ))
-       
-        let str11 = "\n=========================================================================\n\n";
-      //  console.log("=========================================================================\n")
 
-      str10 = str5 + str9 + str11;
+        let str11 = "\n============================================================\n\n";
+        //  console.log("=========================================================================\n")
+
+        str10 = str5 + str9 + str11;
 
     });
-    
-    document.getElementById('result').value =  `UPDATE:\n` + str1 + str2 + str4 + str10;
-    
+
+    document.getElementById('result').value = `UPDATE:\n` + str1 + str2 + str4 + str10;
+
+
+    createNodesButtons(deviceBox)
+
+
     return deviceBox;
 }
 
@@ -110,12 +118,160 @@ function copyToClipboard() {
     result.select();
     document.execCommand('copy');
     showBanner();
-   // alert("Text copied successfully!");
+    // alert("Text copied successfully!");
 }
 function showBanner() {
     var banner = document.getElementById('banner');
     banner.style.display = 'block';
-    setTimeout(function() {
+    setTimeout(function () {
         banner.style.display = 'none';
     }, 3000);
+}
+async function copyNodeUpCmd() {
+    var copy_cmd = document.getElementById('copy_cmd');
+    // Add a click event listener to the button
+
+    // Select all the <p> elements inside the button
+    var pElements = copy_cmd.querySelectorAll('p');
+
+    // Create an array to hold the texts to be copied
+    var textsToCopy = [];
+
+    // Loop over the <p> elements and add their text to the array
+    pElements.forEach(function (pElement) {
+        textsToCopy.push(pElement.textContent.trim());
+    });
+
+    // Join the texts with newlines and copy to the clipboard
+    try {
+        await navigator.clipboard.writeText(textsToCopy.join('\n'));
+
+        // Display the banner
+        showBanner();
+    } catch (error) {
+        // An error occurred while trying to copy the text
+        console.error('Error copying text: ', error);
+    }
+
+
+    // alert("Text copied successfully!");
+}
+
+function createNodesButtons(Nodes) {
+
+
+    // Select the div with the class 'button-container'
+    var nodesContainer = document.querySelector('.AllNodeButtons');
+    while (nodesContainer.firstChild) {
+        nodesContainer.removeChild(nodesContainer.firstChild);
+    }
+
+
+    // Define the number of buttons you want to create
+    var numberOfButtons = Nodes.length;
+
+    // Loop to create buttons
+    for (let i = 0; i < numberOfButtons; i++) {
+        // Create a new button element
+        var button = document.createElement('button');
+
+        // Set the button's type to 'button'
+        button.type = 'button';
+
+        // Set the button's text
+        button.innerHTML = Nodes[i].Node_Name + '-' + Nodes[i].IP;
+        //  console.log(Nodes[i])
+
+        // Add a click event listener to the button
+        // We can use an Immediately Invoked Function Expression (IIFE) to create a new scope for each button.
+        button.addEventListener('click', function (Nodes) {
+            return function () {
+                selectedButton(button, Nodes[i].Interfaces_Name, Nodes[i].Interfaces_Name.length);
+            }
+
+        }(Nodes));
+
+
+        // Add the button to the button container
+        nodesContainer.appendChild(button);
+        // alert(i)
+
+    }
+
+
+}
+
+async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
+    //  console.log(Nodes[i])
+
+
+    // Define the text you want to copy
+    var INTF_CMD_TextToCopy = ''
+    for (var j = 0; j < numberOfInterfaces; j++) {
+
+        let interfaceName = Interfaces_Name[j];
+        let cmd1 = 'sh ' + interfaceName + ' \n';
+        let cmd2 = 'sh run ' + interfaceName + ' \n';
+        INTF_CMD_TextToCopy += cmd1 + cmd2;
+
+    }
+    // console.log( INTF_CMD_TextToCopy)
+
+    // Copy the text to the clipboard
+    try {
+        // Copy the text to the clipboard
+        await navigator.clipboard.writeText(INTF_CMD_TextToCopy);
+
+        // Create a span element to display the message
+        var span = document.createElement('span');
+        span.textContent = ' Copied Command Successfully!';
+        span.style.color = 'green';
+        span.style.border = '1px solid green';
+        span.style.padding = '5px';
+        span.style.marginLeft = '10px';
+        span.style.borderRadius = '5px';
+
+        // Add the span to the button
+        button.parentNode.insertBefore(span, button.nextSibling);
+
+        // Remove the span after 3 seconds
+        setTimeout(function () {
+            span.remove();
+        }, 1000);
+        // The text has been copied to the clipboard
+        console.log('Text copied to clipboard');
+    } catch (error) {
+        // An error occurred while trying to copy the text
+        console.error('Error copying text: ', error);
+    }
+}
+
+function print_all_IPs(){
+    document.getElementById('result').value = "";
+    // var input = e.target.value
+    var currentInput = document.getElementById('description').value.trim();
+    // var currentInput =  "Device details:\nau-olp-adm-it-dsw01-10.149.151.1\nbhpodosmin15-10.149.14.15khk\nabcd-10.149.14.14";
+    // console.log(currentInput)
+    let ipPattern = /\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b/gm;
+    
+    // match(sentence) return all matched regex in a array, null otherwise
+    let matches = currentInput.match(ipPattern);
+    console.log(matches)
+    var all_IP = "";
+    matches.forEach((ip_Address) =>{
+        let ip = 'ping '+ ip_Address + '\n';
+        all_IP += ip;
+        
+    })
+
+    document.getElementById('result').value =  all_IP;
+}
+
+function showPage(pageId) {
+    // Hide all pages
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('active'));
+
+    // Show the selected page
+    document.getElementById(pageId).classList.add('active');
 }
