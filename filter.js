@@ -220,8 +220,8 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
     for (var j = 0; j < numberOfInterfaces; j++) {
 
         let interfaceName = Interfaces_Name[j];
-        let cmd1 = 'sh ' + interfaceName + ' \n';
-        let cmd2 = 'sh run ' + interfaceName + ' \n';
+        let cmd1 = ' sh ' + interfaceName + '\n';
+        let cmd2 = ' sh run ' + interfaceName + '\n';
         INTF_CMD_TextToCopy += cmd1 + cmd2;
 
     }
