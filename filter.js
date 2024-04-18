@@ -222,7 +222,7 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
         let interfaceName = Interfaces_Name[j];
         let cmd1 = ' sh ' + interfaceName + '\n';
         let cmd2 = ' sh run ' + interfaceName + '\n';
-        let cmd2 = ' sh logg | ' + interfaceName.substr(" " + 1) + '\n';
+        let cmd2 = ' sh logg | ' + interfaceName.substr(interfaceName.indexOf(" ") + 1) + '\n';
         INTF_CMD_TextToCopy += cmd1 + cmd2;
 
     }
