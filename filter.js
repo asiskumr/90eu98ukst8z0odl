@@ -220,7 +220,7 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
     for (var j = 0; j < numberOfInterfaces; j++) {
 
         let interfaceName = Interfaces_Name[j];
-        let lineBreak = '\n\n';
+        let lineBreak = ' \n\n ';
         let cmd1 = ' sh ' + interfaceName + '\n';
         let cmd2 = ' sh run ' + interfaceName + '\n';
         let cmd3 = ' sh logg | i ' + interfaceName.substr(interfaceName.indexOf(" ") + 1) + '\n'; 
