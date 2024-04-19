@@ -220,10 +220,11 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
     for (var j = 0; j < numberOfInterfaces; j++) {
 
         let interfaceName = Interfaces_Name[j];
+        let lineBreak = '\n\n';
         let cmd1 = ' sh ' + interfaceName + '\n';
         let cmd2 = ' sh run ' + interfaceName + '\n';
-        let cmd3 = ' sh logg | i ' + interfaceName.substr(interfaceName.indexOf(" ") + 1) + '\n';
-        INTF_CMD_TextToCopy += cmd1 + cmd2 + cmd3;
+        let cmd3 = ' sh logg | i ' + interfaceName.substr(interfaceName.indexOf(" ") + 1) + '\n'; 
+        INTF_CMD_TextToCopy += cmd1 + lineBreak + cmd2 + lineBreak + cmd3 + lineBreak + lineBreak + lineBreak;
 
     }
     // console.log( INTF_CMD_TextToCopy)
