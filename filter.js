@@ -3,7 +3,21 @@
 // Device details:
 // au-olp-adm-it-dsw01-10.149.151.1
 // bhpodosmin15-10.149.14.15`
+function get_Interface_Port_Number(interface_Port_Number){
+      if (interface_Port_Number.startsWith("Port-channel")) {  //"Port-channel100"
+         // console.log(interface_Port_Number.substring(12));
+        return interface_Port_Number.substring(12); 
+    } 
+    else if (interface_Port_Number.startsWith("Vlan")) {   // "Vlan810"
+        // console.log(interface_Port_Number.substring(4));
+        return interface_Port_Number;
+    }
 
+    else if (interface_Port_Number.match(/\w+(\d+.*)/)) {   //"TenGigabitEthernet1/1/15"
+        let match = interface_Port_Number.match(/\w+(\d+.*)/);
+        return match ? match[1] : interface_Port_Number;
+    }
+}
 
 var isClickingFirstTime = true;
 
@@ -28,7 +42,7 @@ function print_all_Interfaces() {
                     let startIndexOfIP = node_full_name.indexOf(ip);
                     let node_name = node_full_name.slice(0, startIndexOfIP - 1);
                     // console.log("node_name: " + node_name + " and IP: " + ip);
-                    deviceBox.push({ "Node_Name": node_name, "IP": ip, "Interfaces_Name": [] })
+                    deviceBox.push({ "Node_Name": node_name, "IP": ip, "Interfaces_Name": [], "Interface_Port_Number":[] })
                 }
                 else {
                     continue;
@@ -54,6 +68,7 @@ function print_all_Interfaces() {
                 if (nodeObj.Node_Name.toUpperCase() === word[currentIndex + 4].toUpperCase()) {
 
                     nodeObj.Interfaces_Name.push(elem + " " + word[currentIndex + 1]);
+                    nodeObj.Interface_Port_Number.push(get_Interface_Port_Number(word[currentIndex + 1]));
                 }
                 // accumulator.push(deviceBox)
             });
@@ -184,12 +199,14 @@ function createNodesButtons(Nodes) {
     for (let i = 0; i < numberOfButtons; i++) {
         // Create a new button element
         var button = document.createElement('button');
-
+        var portNo = document.createElement('button');
+        
         // Set the button's type to 'button'
         button.type = 'button';
-
+        portNo.type = 'button';
         // Set the button's text
         button.innerHTML = Nodes[i].Node_Name + '-' + Nodes[i].IP;
+        portNo.innerHTML = "STATUS";
         //  console.log(Nodes[i])
 
         // Add a click event listener to the button
@@ -201,9 +218,17 @@ function createNodesButtons(Nodes) {
 
         }(Nodes));
 
+         portNo.addEventListener('click', function (Nodes) {
+            return function () {
+                portNumberselectedButton(portNo, Nodes[i].Interface_Port_Number, Nodes[i].Interface_Port_Number.length);
+            }
+
+        }(Nodes));
+
 
         // Add the button to the button container
         nodesContainer.appendChild(button);
+        nodesContainer.appendChild(portNo);
         // alert(i)
 
     }
@@ -252,6 +277,63 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
         }, 1000);
         // The text has been copied to the clipboard
         console.log('Text copied to clipboard');
+    } catch (error) {
+        // An error occurred while trying to copy the text
+        console.error('Error copying text: ', error);
+    }
+}
+
+
+async function portNumberselectedButton(portNumberButton, Interfaces_Ports_No, numberOfInterfaces) {
+    //  console.log(Nodes[i])
+//     Interface Port-channel100
+// Interface Port-channel101
+// Interface TenGigabitEthernet1/1/15
+// Interface TenGigabitEthernet1/1/26
+    // Interface Vlan810
+// sh ip int br | i 100 |101 |1/1/15 |1/1/26 |Vlan810
+
+    // Define the text you want to copy
+   
+    var portNo = '';
+    var showIp =   'sh ip int br | i ';
+    for (var j = 0; j < numberOfInterfaces; j++) {
+
+        if(j === numberOfInterfaces-1){
+            portNo = Interfaces_Ports_No[j] + ' ';
+            showIp += portNo;
+            break;
+        }
+         portNo = Interfaces_Ports_No[j] + ' |';
+        showIp += portNo;
+
+    }
+    var STATUS = showIp;
+    showIp = '';
+
+    // Copy the text to the clipboard
+    try {
+        // Copy the text to the clipboard
+        await navigator.clipboard.writeText(STATUS);
+
+        // Create a span element to display the message
+        var span = document.createElement('span');
+        span.textContent = ' Copied command Successfully, Paste this in putty to get up/down status of interfaces';
+        span.style.color = 'blue';
+        span.style.border = '1px solid green';
+        span.style.padding = '5px';
+        span.style.marginLeft = '10px';
+        span.style.borderRadius = '5px';
+
+        // Add the span to the button
+        portNumberButton.parentNode.insertBefore(span, portNumberButton.nextSibling);
+
+        // Remove the span after 3 seconds
+        setTimeout(function () {
+            span.remove();
+        }, 2000);
+        // The text has been copied to the clipboard
+        console.log('Command copied to clipboard');
     } catch (error) {
         // An error occurred while trying to copy the text
         console.error('Error copying text: ', error);
