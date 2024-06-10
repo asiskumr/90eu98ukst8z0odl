@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Interface_Down</title>
+    <title>Interface Down</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
@@ -51,14 +51,16 @@
             </div>
             <div class="div-30">
                 <label for="result">
-                    <p>Click to copy PuTTY command for Down Interfaces: </p>
+                    <p>Use puTTY & Click below buttons to copy commands </p>
                 </label>
                 <!-- <textarea id="result1" name="result" rows="15" cols="30" readonly></textarea> -->
                 <div class="AllNodeButtons">
                     <!-- <button type="button">Button 1</button>
                     <button type="button">Buttkjengkegnon 2</button>
                     <button type="button">Bon 3</button>
-                    <button type="button">Button 1</button> -->
+                    <button type="button">Button 1</button>
+                    <input type="button" value="Interface up/down status" onclick="getShortDescOfInterfaceStatus()">
+                    -->
 
                 </div>
             </div>
@@ -66,7 +68,7 @@
         <br>
         <div class="button-container">
             <input type="button" value="Generate details" onclick="print_all_Interfaces()">
-            <input type="button" value="Interface up/down status" onclick="getInterfaceStatus()">
+            
             <div id="copy-icon" onclick="copyToClipboard()"><i class="fas fa-copy"></i></div>
 
         </div>
