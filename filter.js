@@ -207,6 +207,7 @@ function createNodesButtons(Nodes) {
         // Set the button's text
         button.innerHTML = Nodes[i].Node_Name + '-' + Nodes[i].IP;
         portNo.innerHTML = "STATUS";
+        portNo.style.color = 'orange';
         //  console.log(Nodes[i])
 
         // Add a click event listener to the button
