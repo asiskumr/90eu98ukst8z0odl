@@ -275,7 +275,7 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
         // Remove the span after 3 seconds
         setTimeout(function () {
             span.remove();
-        }, 1000);
+        }, 5000);
         // The text has been copied to the clipboard
         console.log('Text copied to clipboard');
     } catch (error) {
@@ -320,10 +320,10 @@ async function portNumberselectedButton(portNumberButton, Interfaces_Ports_No, n
         // Create a span element to display the message
         var span = document.createElement('span');
         span.textContent = ' Copied command Successfully, Paste this in putty to get up/down status of interfaces';
-        span.style.color = 'blue';
-        span.style.border = '1px solid green';
-        span.style.padding = '5px';
-        span.style.marginLeft = '10px';
+        span.style.color = 'green';
+        span.style.border = '0px solid green';
+        span.style.padding = '4px';
+        span.style.marginLeft = '6px';
         span.style.borderRadius = '5px';
 
         // Add the span to the button
@@ -332,7 +332,7 @@ async function portNumberselectedButton(portNumberButton, Interfaces_Ports_No, n
         // Remove the span after 3 seconds
         setTimeout(function () {
             span.remove();
-        }, 2000);
+        }, 5000);
         // The text has been copied to the clipboard
         console.log('Command copied to clipboard');
     } catch (error) {
