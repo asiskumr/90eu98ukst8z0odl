@@ -4,11 +4,11 @@
 // au-olp-adm-it-dsw01-10.149.151.1
 // bhpodosmin15-10.149.14.15`
 function get_Interface_Port_Number(interface_Port_Number){
-      if (interface_Port_Number.startsWith("Port-channel")) {  //"Port-channel100"
+      if (interface_Port_Number.toLowerCase().startsWith("port-channel")) {  //"Port-channel100"
          // console.log(interface_Port_Number.substring(12));
         return interface_Port_Number.substring(12); 
     } 
-    else if (interface_Port_Number.startsWith("Vlan")) {   // "Vlan810"
+    else if (interface_Port_Number.toLowerCase().startsWith("vlan")) {   // "Vlan810"
         // console.log(interface_Port_Number.substring(4));
         return interface_Port_Number;
     }
