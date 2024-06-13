@@ -78,6 +78,7 @@ input[type="button"]:hover {
 #tooltip {
     position: relative;
     display: inline-block;
+    cursor: pointer;
     border-bottom: 1px dotted rgb(27, 20, 237);
 }
 
@@ -95,7 +96,7 @@ input[type="button"]:hover {
     z-index: 1;
 }
 
-.tooltip:hover .tooltiptext {
+#tooltip:hover .tooltiptext {
     visibility: visible;
 }
 
