@@ -241,7 +241,7 @@ function createNodesButtons(Nodes) {
 
         portNo.addEventListener('click', function (Nodes) {
             return function () {
-                portNumberselectedButton(portNo, Nodes[i].Node_Name, Nodes[i].Interface_Port_Number, Nodes[i].Interface_Port_Number.length);
+                portNumberselectedButton(portNo, Nodes[i].IP, Nodes[i].Interface_Port_Number, Nodes[i].Interface_Port_Number.length);
             }
 
         }(Nodes));
@@ -311,7 +311,7 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
 }
 
 
-async function portNumberselectedButton(portNumberButton, Node_Name, Interfaces_Ports_No, numberOfInterfaces) {
+async function portNumberselectedButton(portNumberButton, IP, Interfaces_Ports_No, numberOfInterfaces) {
     //  console.log(Nodes[i])
     //     Interface Port-channel100
     // Interface Port-channel101
@@ -346,8 +346,8 @@ async function portNumberselectedButton(portNumberButton, Node_Name, Interfaces_
         // Create a span element to display the message
         var span = document.createElement('span');
 
-        span.innerHTML = `Copied command- Get up/down status of ${numberOfInterfaces} interfaces for the device - <strong>${Node_Name}<strong/>`;
-        span.style.color = 'green';
+        span.innerHTML = `Copied command- Get up/down status of ${numberOfInterfaces} interfaces for the IP - <strong>${IP}<strong/>`;
+        span.style.color = 'lightgreen';
         span.style.border = '2px solid white';
         span.style.padding = '4px';
         span.style.font = 'bold'
