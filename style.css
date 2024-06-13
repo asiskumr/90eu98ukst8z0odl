@@ -83,8 +83,8 @@ input[type="button"]:hover {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 300px;
-    background-color: black;
+    width: 200px;
+    background-color: lightblue;
     color: #fff;
     text-align: center;
     border-radius: 6px;
