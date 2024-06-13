@@ -134,7 +134,7 @@ function print_all_Interfaces() {
 
     document.getElementById('result').value = `UPDATE:\n` + str1 + str2 + str4 + str10;
 
-
+    document.getElementById('titleButtons').innerText = `Interface down of ${deviceBox.length} device below, Click to copy`
     createNodesButtons(deviceBox)
 
 
@@ -187,7 +187,7 @@ async function copyNodeUpCmd() {
 
 function createNodesButtons(Nodes) {
 
-    document.getElementById('deviceTitle').value = `Interface down of ${Nodes.length} device/s below, Click to copy`
+    
     // Select the div with the class 'button-container'
     var nodesContainer = document.querySelector('.AllNodeButtons');
     while (nodesContainer.firstChild) {
@@ -332,11 +332,11 @@ async function portNumberselectedButton(portNumberButton, Node_Name, Interfaces_
         var span = document.createElement('span');
 
         span.innerHTML = `Copied command- Get up/down status of ${numberOfInterfaces} interfaces for the device - <strong>${Node_Name}<strong/>`;
-        span.style.color = 'lightgreen';
-        span.style.border = '3px solid white';
+        span.style.color = 'green';
+        span.style.border = '2px solid white';
         span.style.padding = '4px';
         span.style.font = 'bold'
-        span.style.marginLeft = '5px';
+        span.style.marginLeft = '1px';
         span.style.borderRadius = '5px';
         span.style.backgroundcolor = '#4CAF50';
         // Style the span to appear at the top of the page
