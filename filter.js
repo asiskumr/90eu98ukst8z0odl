@@ -269,7 +269,7 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
         var span = document.createElement('span');
         span.textContent = ' Detailed command copied for ' + numberOfInterfaces + ' interfaces';
         span.style.color = 'white';
-        span.style.border = '3px solid lightgreen';
+        span.style.border = '3px solid green';
         span.style.padding = '5px';
         span.style.marginLeft = '10px';
         span.style.borderRadius = '5px';
@@ -331,12 +331,12 @@ async function portNumberselectedButton(portNumberButton, Node_Name, Interfaces_
         // Create a span element to display the message
         var span = document.createElement('span');
 
-        span.textContent = 'Copied command- Get up/down status of ' + numberOfInterfaces + ' interfaces for device ' + Node_Name;
+        span.innerHTML = `Copied command- Get up/down status of ${numberOfInterfaces} interfaces for the device - <strong>${Node_Name}<strong/>`;
         span.style.color = 'lightgreen';
         span.style.border = '3px solid white';
         span.style.padding = '4px';
         span.style.font = 'bold'
-        span.style.marginLeft = '20px';
+        span.style.marginLeft = '5px';
         span.style.borderRadius = '5px';
         span.style.backgroundcolor = '#4CAF50';
         // Style the span to appear at the top of the page
