@@ -75,17 +75,17 @@ input[type="button"]:hover {
 }
 
 /* Information Icon */
-.tooltip {
+#tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
+    border-bottom: 1px dotted rgb(27, 20, 237);
 }
 
-.tooltip .tooltiptext {
+#tooltip .tooltiptext {
     visibility: hidden;
-    width: 200px;
-    background-color: lightblue;
-    color: #fff;
+    width: 300px;
+    background-color: rgb(240, 193, 39);;
+    color: black;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
