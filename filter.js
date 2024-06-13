@@ -187,7 +187,7 @@ async function copyNodeUpCmd() {
 
 function createNodesButtons(Nodes) {
 
-
+    document.getElementById('deviceTitle').value = `Interface down of ${Nodes.length} device/s below, Click to copy`
     // Select the div with the class 'button-container'
     var nodesContainer = document.querySelector('.AllNodeButtons');
     while (nodesContainer.firstChild) {
