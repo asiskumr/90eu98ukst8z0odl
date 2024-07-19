@@ -1,26 +1,3 @@
-// var description = `CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface Port-channel10 on Node
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface Port-channel12 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TenGigabitEthernet1/1/2 on Node 
-// BHPODOSMIN15 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/3 on Node
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/41 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/43 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/44 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/45 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/7 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/8 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/9 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/1 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/35 on Node 
-// AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/41 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/43 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN:
-// Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/44 on Node AU-OLP-ADM-IT-DSW01 is Down.
-
-// Site Info: BHPB1036-AU/OLP/Olympic Dam Mine
-// Device details:
-// au-olp-adm-it-dsw01-10.149.151.1
-// INC2355048
-// const { yellow } = require("color-name");
-
-// bhpodosmin15-10.149.14.15`
 // var description = `CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface Port-channel10 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface Port-channel12 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TenGigabitEthernet1/1/2 on Node BHPODOSMIN15 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/3 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/41 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/43 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/44 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/45 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/7 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/8 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/9 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/1 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/35 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/41 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/43 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/44 on Node AU-OLP-ADM-IT-DSW01 is Down.
 // Site Info: BHPB1036-AU/OLP/Olympic Dam Mine
 // Device details:
@@ -158,6 +135,7 @@ function print_all_Interfaces() {
     document.getElementById('result').value = `UPDATE:\n` + str1 + str2 + str4 + str10;
     
     document.getElementById('titleButtons').innerText = `Interface down of ${deviceBox.length} device below, Click to copy`
+    document.getElementById('titleButtons').style="color: rgb(172, 25, 172)";
  
    
     createNodesButtons(deviceBox)
