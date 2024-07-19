@@ -12,29 +12,27 @@
 </head>
 
 <body>
-    <div id="banner">Command copied successfully!</div>
+    <div id="banner">Text copied successfully!</div>
 
     <div id="node" class="page ">
         <!-- Content of page 1 -->
 
 
-        <a href="interface.html" class="btn btn-info" onclick="showPage('interface');">Go to Multiple/Interface
-            Down page</a>
+        <a href="interface.html" class="btn btn-info" onclick="showPage('interface');">Go to Multiple_Interface_Down
+            page</a>
     </div>
 
     <div id="interface" class="page active">
         <!-- Content of page 2 -->
 
 
-        <a href="index.html" class="btn btn-info" onclick="showPage('node');">Go to Multiple Device Down page</a>
+        <a href="index.html" class="btn btn-info" onclick="showPage('node');">Go to Multiple_Device_Down page</a>
     </div>
 
-    <form style="background-color:rgb(216, 207, 187)">
+    <form style="background-color:rgb(0, 0, 0)">
 
-
-        
-        <div>
-         <label for="description"><b>Description of MULTIPLE_INTERFACE_DOWN</b></label>
+        <div style="margin-top: 10px;">
+            <label for="description"><b style="color: rgb(172, 25, 172);">MULTIPLE_INTERFACE_DOWN</b></label>
             <div id="tooltip"> &#x1F6C8;
                 <span class="tooltiptext">
                     Logic is wriiten by assuming user won't do any modification while doing copy and paste
@@ -48,13 +46,13 @@
             <div class="div-60">
 
                 <label for="result">
-                    <b>Nodewise filterd out list of interfaces</b>
+                    <b style="color: rgb(172, 25, 172);">Interfaces details nodewise</b>
                 </label>
                 <textarea id="result" name="result" rows="8" cols="50" readonly></textarea>
             </div>
             <div class="div-30">
                 <label for="result">
-                    <b id="titleButtons">  </b>
+                    <b id="titleButtons"> </b>
                 </label>
                 <!-- <textarea id="result1" name="result" rows="15" cols="30" readonly></textarea> -->
                 <div class="AllNodeButtons">
@@ -70,8 +68,8 @@
         </div>
         <br>
         <div class="button-container">
-            <input type="button" value="Generate details" onclick="print_all_Interfaces()">
-            
+            <input type="button" value="Get interfaces" onclick="print_all_Interfaces()">
+
             <div id="copy-icon" onclick="copyToClipboard()"><i class="fas fa-copy"></i></div>
 
         </div>
