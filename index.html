@@ -8,74 +8,73 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="filter.js"></script>
-  
+
 
 </head>
 
 <body>
     <div id="banner">Command copied successfully!</div>
+    <div class="navbar-button">
+        <div id="node" class="page active">
+            <!-- Content of page 1 -->
 
-    <div id="node" class="page active">
-        <!-- Content of page 1 -->
-      
-    
-        <a href="interface.html"class="btn btn-info" onclick="showPage('interface');">Go to Multiple/Interface
-            Down page</a>
-    </div>
 
-    <div id="interface" class="page">
-        <!-- Content of page 2 -->
-   
-        
-        <a href="index.html"class="btn btn-info" onclick="showPage('node');">Go to Multiple Device down page</a>
-    </div>
-
-    <form>
-
-       
-        <label for="description"><b>Description of multiple NODES_DOWN</b></label>
-        <div id="tooltip">&#x1F6C8;
-            <span class="tooltiptext">
-                "Ping" prefix will be added to each IP.
-            </span>
+            <a href="interface.html" class="btn btn-info" onclick="showPage('interface');">Go to Multiple_Interface_Down
+                page</a>
         </div>
-        <textarea id="description" name="description" rows="3" cols="50"></textarea>
+
+        <div id="interface" class="page">
+            <!-- Content of page 2 -->
+
+
+            <a href="index.html" class="btn btn-info" onclick="showPage('node');">Go to Multiple_Device_Down page</a>
+        </div>
+        <div>
+            <button class="cool-button" type="button" id="nodeUpCmd" onclick="copyNodeUpCmd(event)">
+                <p>Device</p>
+                <span class="hovertext">Click to copy for node up</span>
+            </button>
+            <button class="cool-button" type="button" id="hardwareUpCmd" onclick="copyNodeUpCmd(event)">
+                Hardware
+                <span class="hovertext">Click to copy for hardware related </span>
+            </button>
+            <button class="cool-button" type="button" id="CPU_Cmd" onclick="copyNodeUpCmd(event)">
+                CPU
+                <span class="hovertext">Click to copy for CPU utilization</span>
+            </button>
+        </div>
+    </div>
+    <form style="background-color:rgb(0, 0, 0)">
+
 
         <div class="textarea-container">
-            <div class="div-60">
+            <div class="div-50">
 
                 <label for="result">
-                    <b>Device's IP filtered out</b>
+                    <label for="description"><b style="color: aquamarine;">MULTIPLE_DEVICES_DOWN</b></label>
+                    <div id="tooltip">&#x1F6C8;
+                        <span class="tooltiptext">
+                            "Ping" prefix will be added to each IP.
+                        </span>
+                    </div>
                 </label>
-                <textarea id="result" name="result" rows="8" cols="50" readonly></textarea>
+                <textarea id="description" name="description" rows="13" cols="120"></textarea>
+
             </div>
-            <div class="div-30">
+            <div class="div-50">
                 <label for="result">
-                    <p>Node commands</p>
+                    <b style="color: aquamarine;">Filtered IPs</b>
                 </label>
+                <textarea id="result" name="result" rows="13" cols="120" readonly></textarea>
                 <!-- <textarea id="result1" name="result" rows="15" cols="30" readonly></textarea> -->
-                <div class="AllNodeButtons">
-                    <button type="button" id="copy_cmd" onclick="copyNodeUpCmd()">
-                        <p> sh ver | i uptime</p>
 
-                        <p> sh cdp nei </p>
-
-                        <p>sh env all</p>
-
-                        <p> sh process cpu his </p>
-
-                        <span class="hovertext">Click to copy!</span>
-                    </button>
-
-
-                </div>
             </div>
 
         </div>
         <br>
         <div class="button-container">
-            <input type="button" value="Generate details" onclick="print_all_IPs()">
-            <div id="copy-icon" onclick="copyToClipboard()"><i class="fas fa-copy"></i></div>
+            <input type="button" value="Get IP" onclick="print_all_IPs()">
+            <!-- <div id="copy-icon" onclick="copyToClipboard()"><i class="fas fa-copy"></i></div> -->
 
         </div>
     </form>
