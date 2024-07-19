@@ -21,6 +21,14 @@
 // const { yellow } = require("color-name");
 
 // bhpodosmin15-10.149.14.15`
+// var description = `CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface Port-channel10 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface Port-channel12 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TenGigabitEthernet1/1/2 on Node BHPODOSMIN15 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/3 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/41 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/43 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/44 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/45 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/7 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/8 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE1/0/9 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/1 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/35 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/41 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/43 on Node AU-OLP-ADM-IT-DSW01 is Down. CRITICAL_INTERFACE_DOWN: Device NET-CORE_SWITCH Interface TwentyFiveGigE2/0/44 on Node AU-OLP-ADM-IT-DSW01 is Down.
+// Site Info: BHPB1036-AU/OLP/Olympic Dam Mine
+// Device details:
+// au-olp-adm-it-dsw01-10.149.151.1
+
+// const { yellow } = require("color-name");
+
+// bhpodosmin15-10.149.14.15`
 function get_Interface_Port_Number(interface_Port_Number) {
     if (interface_Port_Number.toLowerCase().startsWith("port-channel")) {  //"Port-channel100"
         // console.log(interface_Port_Number.substring(12));
@@ -83,7 +91,7 @@ function print_all_Interfaces() {
         if (elem === 'Interface') {
             deviceBox.forEach(nodeObj => {
                 //    console.log(nodeObj.Node_Name.toUpperCase() +"<->"+ word[currentIndex + 4].toUpperCase())
-                if (nodeObj.Node_Name.toUpperCase() === word[currentIndex + 4].toUpperCase() || nodeObj.Node_Name.toUpperCase() === word[currentIndex + 3].toUpperCase()) {
+                if (nodeObj.Node_Name.toUpperCase() === word[currentIndex + 4].toUpperCase()) {
 
                     nodeObj.Interfaces_Name.push(elem + " " + word[currentIndex + 1]);
                     nodeObj.Interface_Port_Number.push(get_Interface_Port_Number(word[currentIndex + 1]));
@@ -148,8 +156,10 @@ function print_all_Interfaces() {
     });
 
     document.getElementById('result').value = `UPDATE:\n` + str1 + str2 + str4 + str10;
-
+    
     document.getElementById('titleButtons').innerText = `Interface down of ${deviceBox.length} device below, Click to copy`
+ 
+   
     createNodesButtons(deviceBox)
 
 
@@ -170,25 +180,37 @@ function showBanner() {
         banner.style.display = 'none';
     }, 3000);
 }
-async function copyNodeUpCmd() {
-    var copy_cmd = document.getElementById('copy_cmd');
+async function copyNodeUpCmd(e) {
+    var copy_cmd = e.target.id;
     // Add a click event listener to the button
-
+    console.log(copy_cmd);
     // Select all the <p> elements inside the button
-    var pElements = copy_cmd.querySelectorAll('p');
+    // var pElements = copy_cmd.querySelectorAll('p');
 
     // Create an array to hold the texts to be copied
-    var textsToCopy = [];
+    // var textsToCopy = [];
 
     // Loop over the <p> elements and add their text to the array
-    pElements.forEach(function (pElement) {
-        textsToCopy.push(pElement.textContent.trim());
-    });
-
+    // pElements.forEach(function (pElement) {
+    //     textsToCopy.push(pElement.textContent.trim());
+    // });
+    
     // Join the texts with newlines and copy to the clipboard
     try {
-        await navigator.clipboard.writeText(textsToCopy.join('\n'));
-
+        if(copy_cmd === 'nodeUpCmd'){
+            let cmd = [' sh ver | i uptime',' sh cdp nei', ' sh env all', ' sh process cpu his']; 
+            await navigator.clipboard.writeText(cmd.join('\n'));
+        }
+        else if(copy_cmd === 'hardwareUpCmd'){
+            let cmd = [' sh env all',' sh logg | i fan', ' sh logg | i temp', ' sh logg | i power ']; 
+            await navigator.clipboard.writeText(cmd.join('\n'));
+        }
+        else if(copy_cmd === 'CPU_Cmd'){
+            let cmd = [' sh process cpu his '];
+            await navigator.clipboard.writeText(cmd.join('\n'));
+        }
+        
+      
         // Display the banner
         showBanner();
     } catch (error) {
@@ -241,7 +263,7 @@ function createNodesButtons(Nodes) {
 
         portNo.addEventListener('click', function (Nodes) {
             return function () {
-                portNumberselectedButton(portNo, Nodes[i].IP, Nodes[i].Interface_Port_Number, Nodes[i].Interface_Port_Number.length);
+                portNumberselectedButton(portNo, Nodes[i].Node_Name, Nodes[i].Interface_Port_Number, Nodes[i].Interface_Port_Number.length);
             }
 
         }(Nodes));
@@ -311,7 +333,7 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
 }
 
 
-async function portNumberselectedButton(portNumberButton, IP, Interfaces_Ports_No, numberOfInterfaces) {
+async function portNumberselectedButton(portNumberButton, Node_Name, Interfaces_Ports_No, numberOfInterfaces) {
     //  console.log(Nodes[i])
     //     Interface Port-channel100
     // Interface Port-channel101
@@ -346,12 +368,12 @@ async function portNumberselectedButton(portNumberButton, IP, Interfaces_Ports_N
         // Create a span element to display the message
         var span = document.createElement('span');
 
-        span.innerHTML = `Copied command- Get up/down status of ${numberOfInterfaces} interfaces for the IP - <strong>${IP}<strong/>`;
+        span.innerHTML = `Copied command- Get up/down status of ${numberOfInterfaces} interfaces for the device - <strong>${Node_Name}<strong/>`;
         span.style.color = 'lightgreen';
-        span.style.border = '2px solid white';
+        span.style.border = '3px solid white';
         span.style.padding = '4px';
         span.style.font = 'bold'
-        span.style.marginLeft = '1px';
+        span.style.marginLeft = '5px';
         span.style.borderRadius = '5px';
         span.style.backgroundcolor = '#4CAF50';
         // Style the span to appear at the top of the page
@@ -414,8 +436,9 @@ function print_all_IPs() {
         }
     })
 
-
+    if(IP_Box == '') return;
     document.getElementById('result').value = IP_Box;
+    copyToClipboard();
 }
 
 function showPage(pageId) {
