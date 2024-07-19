@@ -142,6 +142,15 @@ input[type="button"]:hover {
 .textarea-container .div-50{
    width: 50%;
 }
+.textarea-container .div-60 {
+   width: 60%;
+   
+   /* Adjust as needed */
+}
+
+.textarea-container .div-35{
+   width: 35%;
+}
 .AllNodeButtons button {
    display: block;
    /* Buttons are displayed vertically */
