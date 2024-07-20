@@ -159,7 +159,7 @@ function showBanner() {
     }, 3000);
 }
 async function copyNodeUpCmd(e) {
-    var copy_cmd = e.target.id;
+   var copy_cmd = e.target.id;
     // Add a click event listener to the button
     console.log(copy_cmd);
     // Select all the <p> elements inside the button
@@ -172,23 +172,46 @@ async function copyNodeUpCmd(e) {
     // pElements.forEach(function (pElement) {
     //     textsToCopy.push(pElement.textContent.trim());
     // });
-    
+
     // Join the texts with newlines and copy to the clipboard
+
     try {
-        if(copy_cmd === 'nodeUpCmd'){
-            let cmd = [' sh ver | i uptime',' sh cdp nei', ' sh env all', ' sh process cpu his']; 
-            await navigator.clipboard.writeText(cmd.join('\n'));
+        cmd_for_resolve = [];
+        if (copy_cmd === 'NodeUpCmd') {
+            cmd_for_resolve = [' sh ver | i uptime', ' sh cdp nei', ' sh env all', ' sh process cpu his'];
+
         }
-        else if(copy_cmd === 'hardwareUpCmd'){
-            let cmd = [' sh env all',' sh logg | i fan', ' sh logg | i temp', ' sh logg | i power ']; 
-            await navigator.clipboard.writeText(cmd.join('\n'));
+        else if (copy_cmd === 'hardwareUpCmd') {
+            cmd_for_resolve = [' sh env all', ' sh logg | i fan', ' sh logg | i temp', ' sh logg | i power '];
+
         }
-        else if(copy_cmd === 'CPU_Cmd'){
-            let cmd = [' sh process cpu his '];
-            await navigator.clipboard.writeText(cmd.join('\n'));
+        else if (copy_cmd === 'CPU_Cmd') {
+            cmd_for_resolve = [' sh process cpu his '];
+
         }
-        
-      
+        else if (copy_cmd === 'Node_Resolution_template') {
+            cmd_for_resolve =
+                ['1.', 'Reason for Outage(RFO): power issue', 'Impact:  ', 'Resolution Steps: Device is up and stable.', ' ', '_______________________________________________________________', ' ', '2.', 'SLA: Met', 'Breached Reason: NA', 'Vendor/Telco Details: NA', 'Case No: NA', 'Incident Category: Power issue', 'Reason for Outage (RFO): The device went down due to a power issue', 'Service(s) Impacted: LAN services', 'Impact: ', 'Customer confirmation on RFO awareness: No', 'Customer confirmation on restoration of normal operations: No'];
+
+        }
+        else if (copy_cmd === 'Hardware_Resolution_template') {
+            cmd_for_resolve = ['1.','Reason for Outage(RFO): Hardware  was down due to power issue', 'Impact:  ', 'Resolution Steps: ', '--- Hardware status of the device is  working fine.', '--- Hence proceeding to close the incident.',  '_______________________________________________________________', ' ', '2.', 'SLA: Met', 'Breached Reason: NA', 'Vendor/Telco Details: NA', 'Case No: NA', 'Incident Category: Power issue', 'Reason for Outage (RFO): Hardware of the device was down due to power issue', 'Service(s) Impacted: LAN services', 'Impact: ' , 'Customer confirmation on RFO awareness: No', 'Customer confirmation on restoration of normal operations: No' ];
+
+        }
+        else if (copy_cmd === 'Interface_Resolution_template') {
+            cmd_for_resolve = ['1.','Reason for Outage(RFO): Interface is down maybe due to neighbour device is down.', 'Impact:  ', 'Resolution Steps: Interface is up.',' ','_______________________________________________________________', ' ', '2.', 'SLA: Met', 'Breached Reason: NA', 'Vendor/Telco Details: NA', 'Case No: NA', 'Incident Category: Power issue', 'Reason for Outage (RFO): Interface is down maybe due to neighbour device is down','Service(s) Impacted: LAN services', 'Impact: ' , 'Customer confirmation on RFO awareness: No', 'Customer confirmation on restoration of normal operations: No' ];
+
+        }
+        else if (copy_cmd === 'CPU_Load_Resolution_template') {
+            cmd_for_resolve = ['1.','Reason for Outage(RFO): High CPU utilization', 'Impact:  ', 'Resolution Steps: ', '---CPU load is below 80% and utilization is normal.', '--- Hence proceeding to close the incident.',  '_______________________________________________________________', ' ', '2.', 'SLA: Met', 'Breached Reason: NA', 'Vendor/Telco Details: NA', 'Case No: NA', 'Incident Category: High CPU Load', 'Reason for Outage (RFO): CPU Load was above 80%', 'Service(s) Impacted: LAN services', 'Impact: ' , 'Customer confirmation on RFO awareness: No', 'Customer confirmation on restoration of normal operations: No' ];
+
+        }
+        else{
+            cmd_for_resolve = ['No Text Copied!']
+        }
+        await navigator.clipboard.writeText(cmd_for_resolve.join('\n'));
+
+
         // Display the banner
         showBanner();
     } catch (error) {
