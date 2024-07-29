@@ -156,7 +156,7 @@ function showBanner() {
     banner.style.display = 'block';
     setTimeout(function () {
         banner.style.display = 'none';
-    }, 3000);
+    }, 500);
 }
 async function copyNodeUpCmd(e) {
    var copy_cmd = e.target.id;
@@ -178,24 +178,24 @@ async function copyNodeUpCmd(e) {
     try {
         cmd_for_resolve = [];
         if (copy_cmd === 'NodeUpCmd') {
-            cmd_for_resolve = [' sh ver | i uptime', ' sh cdp nei', ' sh env all', ' sh process cpu his'];
+            cmd_for_resolve = [' sh ver | i uptime', ' sh cdp nei', ' sh env all', ' sh process cpu his' , 'ssh clo', ''];
 
         }
         else if (copy_cmd === 'hardwareUpCmd') {
-            cmd_for_resolve = [' sh env all', ' sh logg | i fan', ' sh logg | i temp', ' sh logg | i power '];
+            cmd_for_resolve = [' sh env all', ' sh logg | i fan', ' sh logg | i temp', ' sh logg | i power ', 'ssh clo', ''];
 
         }
         else if (copy_cmd === 'CPU_Cmd') {
-            cmd_for_resolve = [' sh process cpu his '];
+            cmd_for_resolve = [' sh process cpu his ', 'ssh clo', ''];
 
         }
         else if (copy_cmd === 'Node_Resolution_template') {
             cmd_for_resolve =
-                ['1.', 'Reason for Outage(RFO): power issue', 'Impact:  ', 'Resolution Steps: Device is up and stable.', ' ', '_______________________________________________________________', ' ', '2.', 'SLA: Met', 'Breached Reason: NA', 'Vendor/Telco Details: NA', 'Case No: NA', 'Incident Category: Power issue', 'Reason for Outage (RFO): The device went down due to a power issue', 'Service(s) Impacted: LAN services', 'Impact: ', 'Customer confirmation on RFO awareness: No', 'Customer confirmation on restoration of normal operations: No'];
+                ['1.', 'Reason for Outage(RFO): Power issue', 'Impact:  ', 'Resolution Steps: ', ' -  Device is up and stable. ', '_______________________________________________________________', '2.', 'SLA: Met', 'Breached Reason: NA', 'Vendor/Telco Details: NA', 'Case No: NA', 'Incident Category: Power issue', 'Reason for Outage (RFO): The device went down due to a power issue', 'Service(s) Impacted: LAN services', 'Impact: ', 'Customer confirmation on RFO awareness: No', 'Customer confirmation on restoration of normal operations: No'];
 
         }
         else if (copy_cmd === 'Hardware_Resolution_template') {
-            cmd_for_resolve = ['1.','Reason for Outage(RFO): Hardware  was down due to power issue', 'Impact:  ', 'Resolution Steps: ', '--- Hardware status of the device is  working fine.', '--- Hence proceeding to close the incident.',  '_______________________________________________________________', ' ', '2.', 'SLA: Met', 'Breached Reason: NA', 'Vendor/Telco Details: NA', 'Case No: NA', 'Incident Category: Power issue', 'Reason for Outage (RFO): Hardware of the device was down due to power issue', 'Service(s) Impacted: LAN services', 'Impact: ' , 'Customer confirmation on RFO awareness: No', 'Customer confirmation on restoration of normal operations: No' ];
+            cmd_for_resolve = ['1.','Reason for Outage(RFO): Hardware  was down due to power issue', 'Impact:  ', 'Resolution Steps: ', '--- Hardware status of the device is  working fine.', '--- Hence proceeding to close the incident.',  '_______________________________________________________________',  '2.', 'SLA: Met', 'Breached Reason: NA', 'Vendor/Telco Details: NA', 'Case No: NA', 'Incident Category: Power issue', 'Reason for Outage (RFO): Hardware of the device was down due to power issue', 'Service(s) Impacted: LAN services', 'Impact: ' , 'Customer confirmation on RFO awareness: No', 'Customer confirmation on restoration of normal operations: No' ];
 
         }
         else if (copy_cmd === 'Interface_Resolution_template') {
@@ -425,21 +425,56 @@ function print_all_IPs() {
     // var input = e.target.value
     var currentInput = document.getElementById('description').value.trim();
     IP_Box = "";
-
+    IP_array = [];
     let word = currentInput.replace(/\n/g, " ").split(' ')
     //get devices details
     word.forEach(function (device) {
         // console.log(device +" -> "+isIP_Found(device))
         if (isIP_Found(device) !== false) {
+            IP_array.push(isIP_Found(device));
             let cmd = 'ping ' + isIP_Found(device) + '\n';
             IP_Box += cmd;
 
         }
     })
 
-    if(IP_Box == '') return;
+    if (IP_array.length === 0) {
+        document.getElementById('result').value = "No IP found";
+        copyToClipboard();
+        showBanner_IP(IP_array.length);
+        return;
+    }
+    showBanner_IP(IP_array.length);
     document.getElementById('result').value = IP_Box;
     copyToClipboard();
+}
+
+function showBanner_IP(iplength) {
+     // Create a span element to display the message
+     var span = document.createElement('span');
+     span.innerHTML = `${iplength} IPs copied`;
+     span.style.color = 'lightgreen';
+     span.style.border = '2px solid white';
+     span.style.padding = '4px';
+     span.style.font = 'bold'
+     span.style.marginLeft = '5px';
+     span.style.borderRadius = '5px';
+     span.style.backgroundcolor = '#4CAF50';
+     // Style the span to appear at the top of the page
+     span.style.position = 'fixed';
+     span.style.top = '40px';
+     span.style.left = '50%'; // Center the span
+     span.style.transform = 'translate(-50%, 0)'; // Ensure the center of the span is at the center of the page
+     span.style.zIndex = '1000'; // Ensure the span appears above other elements
+     // Add the span to the body of the document
+     document.body.appendChild(span);
+     // Add the span to the button
+    
+     // Remove the span after 3 seconds
+     setTimeout(function () {
+         span.remove();
+     }, 10000);
+
 }
 
 function showPage(pageId) {
