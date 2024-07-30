@@ -178,7 +178,7 @@ async function copyNodeUpCmd(e) {
     try {
         cmd_for_resolve = [];
         if (copy_cmd === 'NodeUpCmd') {
-            cmd_for_resolve = [' sh ver | i uptime', ' sh cdp nei', ' sh env all', ' sh process cpu his' , 'ssh clo', ''];
+            cmd_for_resolve = [' sh ver | i restart|reload|up', ' sh cdp nei', ' sh env all', ' sh process cpu his' , 'ssh clo', ''];
 
         }
         else if (copy_cmd === 'hardwareUpCmd') {
