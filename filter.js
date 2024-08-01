@@ -182,7 +182,7 @@ async function copyNodeUpCmd(e) {
 
         }
         else if (copy_cmd === 'hardwareUpCmd') {
-            cmd_for_resolve = [' sh env all', ' sh logg | i fan', ' sh logg | i temp', ' sh logg | i power ', 'ssh clo', ''];
+            cmd_for_resolve = [' sh env all', ' sh logg | i fan', ' sh logg | i temp', ' sh logg | i power ', 'sh clo', ''];
 
         }
         else if (copy_cmd === 'CPU_Cmd') {
