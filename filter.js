@@ -446,7 +446,10 @@ function print_all_IPs() {
     }
     showBanner_IP(IP_array.length);
     document.getElementById('result').value = IP_Box;
-    copyToClipboard();
+    var result = document.getElementById('result');
+    result.select();
+    document.execCommand('copy');
+   // copyToClipboard();
 }
 
 function showBanner_IP(iplength) {
