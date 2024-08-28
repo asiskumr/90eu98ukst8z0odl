@@ -4,7 +4,8 @@
 // au-olp-adm-it-dsw01-10.149.151.1
 
 // const { yellow } = require("color-name");
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8835983411485108"
+     crossorigin="anonymous"></script>
 // bhpodosmin15-10.149.14.15`
 function get_Interface_Port_Number(interface_Port_Number) {
     if (interface_Port_Number.toLowerCase().startsWith("port-channel")) {  //"Port-channel100"
