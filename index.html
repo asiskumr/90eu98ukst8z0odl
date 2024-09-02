@@ -17,13 +17,26 @@
 
   gtag('config', 'G-QT3X9W3H8H');
 </script>
+ 
     <title>Incident | Device</title>
     <link rel="icon" type="image/png" href="favicon.png">
  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">   
-    
+    <link rel="stylesheet" href="style.css">
+  <!-- Disable Right-Click and View Source -->
+    <script>
+  document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+  }, false);
+  
+  document.addEventListener("keydown", function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'i')) {
+      e.preventDefault();
+    }
+  }, false);
+</script>
+
     <script src="filter.js"></script>
 
 
