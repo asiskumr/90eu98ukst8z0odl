@@ -307,6 +307,7 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
         var span = document.createElement('span');
         span.textContent = ' Detailed command copied for ' + numberOfInterfaces + ' interfaces';
         span.style.color = 'white';
+        span.style.backgroundColor = 'blue';
         span.style.border = '3px solid green';
         span.style.padding = '5px';
         span.style.marginLeft = '10px';
@@ -371,6 +372,7 @@ async function portNumberselectedButton(portNumberButton, Node_Name, Interfaces_
 
         span.innerHTML = `Copied command- Get up/down status of ${numberOfInterfaces} interfaces for the device - <strong>${Node_Name}<strong/>`;
         span.style.color = 'lightgreen';
+         span.style.backgroundColor = 'black';
         span.style.border = '3px solid white';
         span.style.padding = '4px';
         span.style.font = 'bold'
@@ -457,6 +459,7 @@ function showBanner_IP(iplength) {
      var span = document.createElement('span');
      span.innerHTML = `${iplength} IPs copied`;
      span.style.color = 'lightgreen';
+     span.style.backgroundColor = 'black';
      span.style.border = '2px solid white';
      span.style.padding = '4px';
      span.style.font = 'bold'
