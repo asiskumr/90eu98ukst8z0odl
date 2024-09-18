@@ -178,15 +178,15 @@ async function copyNodeUpCmd(e) {
     try {
         cmd_for_resolve = [];
         if (copy_cmd === 'NodeUpCmd') {
-            cmd_for_resolve = [' Terminal length 0', + ' sh ver | i reload|up', ' sh cdp nei', ' sh env all', ' sh process cpu his' , 'ssh clo', ''];
+            cmd_for_resolve = [' Terminal length 0',  ' sh ver | i reload|up', ' sh cdp nei', ' sh env all', ' sh process cpu his' , 'ssh clo', ''];
 
         }
         else if (copy_cmd === 'hardwareUpCmd') {
-            cmd_for_resolve = [' Terminal length 0', +' sh env all', ' sh logg | i fan', ' sh logg | i temp', ' sh logg | i power ', 'sh clo', ''];
+            cmd_for_resolve = [' Terminal length 0',  ' sh env all', ' sh logg | i fan', ' sh logg | i temp', ' sh logg | i power ', 'sh clo', ''];
 
         }
         else if (copy_cmd === 'CPU_Cmd') {
-            cmd_for_resolve = [' Terminal length 0', +' sh process cpu his ', 'ssh clo', ''];
+            cmd_for_resolve = [' Terminal length 0', ' sh process cpu his ', 'ssh clo', ''];
 
         }
         else if (copy_cmd === 'Node_Resolution_template') {
