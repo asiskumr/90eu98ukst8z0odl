@@ -294,11 +294,11 @@ async function selectedButton(button, Interfaces_Name, numberOfInterfaces) {
         let cmd2 = ' sh run ' + interfaceName + '\n';
         let cmd3 = ' sh logg | i ' + interfaceName.substr(interfaceName.indexOf(" ") + 1) + '\n';
         INTF_CMD_TextToCopy += cmd1 + lineBreak + cmd2 + lineBreak + cmd3 + lineBreak + lineBreak + lineBreak;
-        INTF_CMD_TextToCopy = ' Terminal length 0 ' + '\n'+ INTF_CMD_TextToCopy;
+        
 
     }
     // console.log( INTF_CMD_TextToCopy)
-
+    INTF_CMD_TextToCopy = ' Terminal length 0 ' + '\n'+ INTF_CMD_TextToCopy;
     // Copy the text to the clipboard
     try {
         // Copy the text to the clipboard
